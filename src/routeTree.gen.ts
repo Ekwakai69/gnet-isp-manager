@@ -12,7 +12,29 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PayTokenRouteImport } from './routes/pay.$token'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
+import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
+import { Route as AuthenticatedInvoicesRouteImport } from './routes/_authenticated/invoices'
+import { Route as AuthenticatedHotspotPackagesRouteImport } from './routes/_authenticated/hotspot-packages'
+import { Route as AuthenticatedExpensesRouteImport } from './routes/_authenticated/expenses'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedAccessCodesRouteImport } from './routes/_authenticated/access-codes'
+import { Route as AuthenticatedTicketsIndexRouteImport } from './routes/_authenticated/tickets.index'
+import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
+import { Route as AuthenticatedClientsIndexRouteImport } from './routes/_authenticated/clients.index'
+import { Route as AuthenticatedTicketsIdRouteImport } from './routes/_authenticated/tickets.$id'
+import { Route as AuthenticatedSuperAdminIspsRouteImport } from './routes/_authenticated/super-admin.isps'
+import { Route as AuthenticatedSmsTemplatesRouteImport } from './routes/_authenticated/sms.templates'
+import { Route as AuthenticatedRoutersIdRouteImport } from './routes/_authenticated/routers.$id'
+import { Route as AuthenticatedMikrotikStatusRouteImport } from './routes/_authenticated/mikrotik.status'
+import { Route as AuthenticatedMikrotikPppoeSessionsRouteImport } from './routes/_authenticated/mikrotik.pppoe-sessions'
+import { Route as AuthenticatedMikrotikLogsRouteImport } from './routes/_authenticated/mikrotik.logs'
+import { Route as AuthenticatedMikrotikIpPoolsRouteImport } from './routes/_authenticated/mikrotik.ip-pools'
+import { Route as AuthenticatedMikrotikHotspotSessionsRouteImport } from './routes/_authenticated/mikrotik.hotspot-sessions'
+import { Route as AuthenticatedClientsNewRouteImport } from './routes/_authenticated/clients.new'
+import { Route as AuthenticatedClientsIdRouteImport } from './routes/_authenticated/clients.$id'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -28,46 +50,307 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PayTokenRoute = PayTokenRouteImport.update({
+  id: '/pay/$token',
+  path: '/pay/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPackagesRoute = AuthenticatedPackagesRouteImport.update({
+  id: '/packages',
+  path: '/packages',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedInvoicesRoute = AuthenticatedInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedHotspotPackagesRoute =
+  AuthenticatedHotspotPackagesRouteImport.update({
+    id: '/hotspot-packages',
+    path: '/hotspot-packages',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedExpensesRoute = AuthenticatedExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedAccessCodesRoute =
+  AuthenticatedAccessCodesRouteImport.update({
+    id: '/access-codes',
+    path: '/access-codes',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedTicketsIndexRoute =
+  AuthenticatedTicketsIndexRouteImport.update({
+    id: '/tickets/',
+    path: '/tickets/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedRoutersIndexRoute =
+  AuthenticatedRoutersIndexRouteImport.update({
+    id: '/routers/',
+    path: '/routers/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedClientsIndexRoute =
+  AuthenticatedClientsIndexRouteImport.update({
+    id: '/clients/',
+    path: '/clients/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedTicketsIdRoute = AuthenticatedTicketsIdRouteImport.update({
+  id: '/tickets/$id',
+  path: '/tickets/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedSuperAdminIspsRoute =
+  AuthenticatedSuperAdminIspsRouteImport.update({
+    id: '/super-admin/isps',
+    path: '/super-admin/isps',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedSmsTemplatesRoute =
+  AuthenticatedSmsTemplatesRouteImport.update({
+    id: '/sms/templates',
+    path: '/sms/templates',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedRoutersIdRoute = AuthenticatedRoutersIdRouteImport.update({
+  id: '/routers/$id',
+  path: '/routers/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMikrotikStatusRoute =
+  AuthenticatedMikrotikStatusRouteImport.update({
+    id: '/mikrotik/status',
+    path: '/mikrotik/status',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedMikrotikPppoeSessionsRoute =
+  AuthenticatedMikrotikPppoeSessionsRouteImport.update({
+    id: '/mikrotik/pppoe-sessions',
+    path: '/mikrotik/pppoe-sessions',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedMikrotikLogsRoute =
+  AuthenticatedMikrotikLogsRouteImport.update({
+    id: '/mikrotik/logs',
+    path: '/mikrotik/logs',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedMikrotikIpPoolsRoute =
+  AuthenticatedMikrotikIpPoolsRouteImport.update({
+    id: '/mikrotik/ip-pools',
+    path: '/mikrotik/ip-pools',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedMikrotikHotspotSessionsRoute =
+  AuthenticatedMikrotikHotspotSessionsRouteImport.update({
+    id: '/mikrotik/hotspot-sessions',
+    path: '/mikrotik/hotspot-sessions',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedClientsNewRoute = AuthenticatedClientsNewRouteImport.update({
+  id: '/clients/new',
+  path: '/clients/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedClientsIdRoute = AuthenticatedClientsIdRouteImport.update({
+  id: '/clients/$id',
+  path: '/clients/$id',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/access-codes': typeof AuthenticatedAccessCodesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/expenses': typeof AuthenticatedExpensesRoute
+  '/hotspot-packages': typeof AuthenticatedHotspotPackagesRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/packages': typeof AuthenticatedPackagesRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/pay/$token': typeof PayTokenRoute
+  '/clients/$id': typeof AuthenticatedClientsIdRoute
+  '/clients/new': typeof AuthenticatedClientsNewRoute
+  '/mikrotik/hotspot-sessions': typeof AuthenticatedMikrotikHotspotSessionsRoute
+  '/mikrotik/ip-pools': typeof AuthenticatedMikrotikIpPoolsRoute
+  '/mikrotik/logs': typeof AuthenticatedMikrotikLogsRoute
+  '/mikrotik/pppoe-sessions': typeof AuthenticatedMikrotikPppoeSessionsRoute
+  '/mikrotik/status': typeof AuthenticatedMikrotikStatusRoute
+  '/routers/$id': typeof AuthenticatedRoutersIdRoute
+  '/sms/templates': typeof AuthenticatedSmsTemplatesRoute
+  '/super-admin/isps': typeof AuthenticatedSuperAdminIspsRoute
+  '/tickets/$id': typeof AuthenticatedTicketsIdRoute
+  '/clients/': typeof AuthenticatedClientsIndexRoute
+  '/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/tickets/': typeof AuthenticatedTicketsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/access-codes': typeof AuthenticatedAccessCodesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/expenses': typeof AuthenticatedExpensesRoute
+  '/hotspot-packages': typeof AuthenticatedHotspotPackagesRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/packages': typeof AuthenticatedPackagesRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/pay/$token': typeof PayTokenRoute
+  '/clients/$id': typeof AuthenticatedClientsIdRoute
+  '/clients/new': typeof AuthenticatedClientsNewRoute
+  '/mikrotik/hotspot-sessions': typeof AuthenticatedMikrotikHotspotSessionsRoute
+  '/mikrotik/ip-pools': typeof AuthenticatedMikrotikIpPoolsRoute
+  '/mikrotik/logs': typeof AuthenticatedMikrotikLogsRoute
+  '/mikrotik/pppoe-sessions': typeof AuthenticatedMikrotikPppoeSessionsRoute
+  '/mikrotik/status': typeof AuthenticatedMikrotikStatusRoute
+  '/routers/$id': typeof AuthenticatedRoutersIdRoute
+  '/sms/templates': typeof AuthenticatedSmsTemplatesRoute
+  '/super-admin/isps': typeof AuthenticatedSuperAdminIspsRoute
+  '/tickets/$id': typeof AuthenticatedTicketsIdRoute
+  '/clients': typeof AuthenticatedClientsIndexRoute
+  '/routers': typeof AuthenticatedRoutersIndexRoute
+  '/tickets': typeof AuthenticatedTicketsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
+  '/_authenticated/access-codes': typeof AuthenticatedAccessCodesRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/expenses': typeof AuthenticatedExpensesRoute
+  '/_authenticated/hotspot-packages': typeof AuthenticatedHotspotPackagesRoute
+  '/_authenticated/invoices': typeof AuthenticatedInvoicesRoute
+  '/_authenticated/packages': typeof AuthenticatedPackagesRoute
+  '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/pay/$token': typeof PayTokenRoute
+  '/_authenticated/clients/$id': typeof AuthenticatedClientsIdRoute
+  '/_authenticated/clients/new': typeof AuthenticatedClientsNewRoute
+  '/_authenticated/mikrotik/hotspot-sessions': typeof AuthenticatedMikrotikHotspotSessionsRoute
+  '/_authenticated/mikrotik/ip-pools': typeof AuthenticatedMikrotikIpPoolsRoute
+  '/_authenticated/mikrotik/logs': typeof AuthenticatedMikrotikLogsRoute
+  '/_authenticated/mikrotik/pppoe-sessions': typeof AuthenticatedMikrotikPppoeSessionsRoute
+  '/_authenticated/mikrotik/status': typeof AuthenticatedMikrotikStatusRoute
+  '/_authenticated/routers/$id': typeof AuthenticatedRoutersIdRoute
+  '/_authenticated/sms/templates': typeof AuthenticatedSmsTemplatesRoute
+  '/_authenticated/super-admin/isps': typeof AuthenticatedSuperAdminIspsRoute
+  '/_authenticated/tickets/$id': typeof AuthenticatedTicketsIdRoute
+  '/_authenticated/clients/': typeof AuthenticatedClientsIndexRoute
+  '/_authenticated/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/_authenticated/tickets/': typeof AuthenticatedTicketsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/access-codes'
+    | '/dashboard'
+    | '/expenses'
+    | '/hotspot-packages'
+    | '/invoices'
+    | '/packages'
+    | '/payments'
+    | '/settings'
+    | '/pay/$token'
+    | '/clients/$id'
+    | '/clients/new'
+    | '/mikrotik/hotspot-sessions'
+    | '/mikrotik/ip-pools'
+    | '/mikrotik/logs'
+    | '/mikrotik/pppoe-sessions'
+    | '/mikrotik/status'
+    | '/routers/$id'
+    | '/sms/templates'
+    | '/super-admin/isps'
+    | '/tickets/$id'
+    | '/clients/'
+    | '/routers/'
+    | '/tickets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/dashboard'
+  to:
+    | '/'
+    | '/login'
+    | '/access-codes'
+    | '/dashboard'
+    | '/expenses'
+    | '/hotspot-packages'
+    | '/invoices'
+    | '/packages'
+    | '/payments'
+    | '/settings'
+    | '/pay/$token'
+    | '/clients/$id'
+    | '/clients/new'
+    | '/mikrotik/hotspot-sessions'
+    | '/mikrotik/ip-pools'
+    | '/mikrotik/logs'
+    | '/mikrotik/pppoe-sessions'
+    | '/mikrotik/status'
+    | '/routers/$id'
+    | '/sms/templates'
+    | '/super-admin/isps'
+    | '/tickets/$id'
+    | '/clients'
+    | '/routers'
+    | '/tickets'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/login'
+    | '/_authenticated/access-codes'
     | '/_authenticated/dashboard'
+    | '/_authenticated/expenses'
+    | '/_authenticated/hotspot-packages'
+    | '/_authenticated/invoices'
+    | '/_authenticated/packages'
+    | '/_authenticated/payments'
+    | '/_authenticated/settings'
+    | '/pay/$token'
+    | '/_authenticated/clients/$id'
+    | '/_authenticated/clients/new'
+    | '/_authenticated/mikrotik/hotspot-sessions'
+    | '/_authenticated/mikrotik/ip-pools'
+    | '/_authenticated/mikrotik/logs'
+    | '/_authenticated/mikrotik/pppoe-sessions'
+    | '/_authenticated/mikrotik/status'
+    | '/_authenticated/routers/$id'
+    | '/_authenticated/sms/templates'
+    | '/_authenticated/super-admin/isps'
+    | '/_authenticated/tickets/$id'
+    | '/_authenticated/clients/'
+    | '/_authenticated/routers/'
+    | '/_authenticated/tickets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   LoginRoute: typeof LoginRoute
+  PayTokenRoute: typeof PayTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -93,6 +376,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pay/$token': {
+      id: '/pay/$token'
+      path: '/pay/$token'
+      fullPath: '/pay/$token'
+      preLoaderRoute: typeof PayTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/payments': {
+      id: '/_authenticated/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/packages': {
+      id: '/_authenticated/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof AuthenticatedPackagesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/invoices': {
+      id: '/_authenticated/invoices'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof AuthenticatedInvoicesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/hotspot-packages': {
+      id: '/_authenticated/hotspot-packages'
+      path: '/hotspot-packages'
+      fullPath: '/hotspot-packages'
+      preLoaderRoute: typeof AuthenticatedHotspotPackagesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/expenses': {
+      id: '/_authenticated/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof AuthenticatedExpensesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -100,15 +432,164 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/access-codes': {
+      id: '/_authenticated/access-codes'
+      path: '/access-codes'
+      fullPath: '/access-codes'
+      preLoaderRoute: typeof AuthenticatedAccessCodesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tickets/': {
+      id: '/_authenticated/tickets/'
+      path: '/tickets'
+      fullPath: '/tickets/'
+      preLoaderRoute: typeof AuthenticatedTicketsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/routers/': {
+      id: '/_authenticated/routers/'
+      path: '/routers'
+      fullPath: '/routers/'
+      preLoaderRoute: typeof AuthenticatedRoutersIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/clients/': {
+      id: '/_authenticated/clients/'
+      path: '/clients'
+      fullPath: '/clients/'
+      preLoaderRoute: typeof AuthenticatedClientsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tickets/$id': {
+      id: '/_authenticated/tickets/$id'
+      path: '/tickets/$id'
+      fullPath: '/tickets/$id'
+      preLoaderRoute: typeof AuthenticatedTicketsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/super-admin/isps': {
+      id: '/_authenticated/super-admin/isps'
+      path: '/super-admin/isps'
+      fullPath: '/super-admin/isps'
+      preLoaderRoute: typeof AuthenticatedSuperAdminIspsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/sms/templates': {
+      id: '/_authenticated/sms/templates'
+      path: '/sms/templates'
+      fullPath: '/sms/templates'
+      preLoaderRoute: typeof AuthenticatedSmsTemplatesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/routers/$id': {
+      id: '/_authenticated/routers/$id'
+      path: '/routers/$id'
+      fullPath: '/routers/$id'
+      preLoaderRoute: typeof AuthenticatedRoutersIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/mikrotik/status': {
+      id: '/_authenticated/mikrotik/status'
+      path: '/mikrotik/status'
+      fullPath: '/mikrotik/status'
+      preLoaderRoute: typeof AuthenticatedMikrotikStatusRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/mikrotik/pppoe-sessions': {
+      id: '/_authenticated/mikrotik/pppoe-sessions'
+      path: '/mikrotik/pppoe-sessions'
+      fullPath: '/mikrotik/pppoe-sessions'
+      preLoaderRoute: typeof AuthenticatedMikrotikPppoeSessionsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/mikrotik/logs': {
+      id: '/_authenticated/mikrotik/logs'
+      path: '/mikrotik/logs'
+      fullPath: '/mikrotik/logs'
+      preLoaderRoute: typeof AuthenticatedMikrotikLogsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/mikrotik/ip-pools': {
+      id: '/_authenticated/mikrotik/ip-pools'
+      path: '/mikrotik/ip-pools'
+      fullPath: '/mikrotik/ip-pools'
+      preLoaderRoute: typeof AuthenticatedMikrotikIpPoolsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/mikrotik/hotspot-sessions': {
+      id: '/_authenticated/mikrotik/hotspot-sessions'
+      path: '/mikrotik/hotspot-sessions'
+      fullPath: '/mikrotik/hotspot-sessions'
+      preLoaderRoute: typeof AuthenticatedMikrotikHotspotSessionsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/clients/new': {
+      id: '/_authenticated/clients/new'
+      path: '/clients/new'
+      fullPath: '/clients/new'
+      preLoaderRoute: typeof AuthenticatedClientsNewRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/clients/$id': {
+      id: '/_authenticated/clients/$id'
+      path: '/clients/$id'
+      fullPath: '/clients/$id'
+      preLoaderRoute: typeof AuthenticatedClientsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAccessCodesRoute: typeof AuthenticatedAccessCodesRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedExpensesRoute: typeof AuthenticatedExpensesRoute
+  AuthenticatedHotspotPackagesRoute: typeof AuthenticatedHotspotPackagesRoute
+  AuthenticatedInvoicesRoute: typeof AuthenticatedInvoicesRoute
+  AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
+  AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedClientsIdRoute: typeof AuthenticatedClientsIdRoute
+  AuthenticatedClientsNewRoute: typeof AuthenticatedClientsNewRoute
+  AuthenticatedMikrotikHotspotSessionsRoute: typeof AuthenticatedMikrotikHotspotSessionsRoute
+  AuthenticatedMikrotikIpPoolsRoute: typeof AuthenticatedMikrotikIpPoolsRoute
+  AuthenticatedMikrotikLogsRoute: typeof AuthenticatedMikrotikLogsRoute
+  AuthenticatedMikrotikPppoeSessionsRoute: typeof AuthenticatedMikrotikPppoeSessionsRoute
+  AuthenticatedMikrotikStatusRoute: typeof AuthenticatedMikrotikStatusRoute
+  AuthenticatedRoutersIdRoute: typeof AuthenticatedRoutersIdRoute
+  AuthenticatedSmsTemplatesRoute: typeof AuthenticatedSmsTemplatesRoute
+  AuthenticatedSuperAdminIspsRoute: typeof AuthenticatedSuperAdminIspsRoute
+  AuthenticatedTicketsIdRoute: typeof AuthenticatedTicketsIdRoute
+  AuthenticatedClientsIndexRoute: typeof AuthenticatedClientsIndexRoute
+  AuthenticatedRoutersIndexRoute: typeof AuthenticatedRoutersIndexRoute
+  AuthenticatedTicketsIndexRoute: typeof AuthenticatedTicketsIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAccessCodesRoute: AuthenticatedAccessCodesRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedExpensesRoute: AuthenticatedExpensesRoute,
+  AuthenticatedHotspotPackagesRoute: AuthenticatedHotspotPackagesRoute,
+  AuthenticatedInvoicesRoute: AuthenticatedInvoicesRoute,
+  AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
+  AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedClientsIdRoute: AuthenticatedClientsIdRoute,
+  AuthenticatedClientsNewRoute: AuthenticatedClientsNewRoute,
+  AuthenticatedMikrotikHotspotSessionsRoute:
+    AuthenticatedMikrotikHotspotSessionsRoute,
+  AuthenticatedMikrotikIpPoolsRoute: AuthenticatedMikrotikIpPoolsRoute,
+  AuthenticatedMikrotikLogsRoute: AuthenticatedMikrotikLogsRoute,
+  AuthenticatedMikrotikPppoeSessionsRoute:
+    AuthenticatedMikrotikPppoeSessionsRoute,
+  AuthenticatedMikrotikStatusRoute: AuthenticatedMikrotikStatusRoute,
+  AuthenticatedRoutersIdRoute: AuthenticatedRoutersIdRoute,
+  AuthenticatedSmsTemplatesRoute: AuthenticatedSmsTemplatesRoute,
+  AuthenticatedSuperAdminIspsRoute: AuthenticatedSuperAdminIspsRoute,
+  AuthenticatedTicketsIdRoute: AuthenticatedTicketsIdRoute,
+  AuthenticatedClientsIndexRoute: AuthenticatedClientsIndexRoute,
+  AuthenticatedRoutersIndexRoute: AuthenticatedRoutersIndexRoute,
+  AuthenticatedTicketsIndexRoute: AuthenticatedTicketsIndexRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -119,6 +600,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   LoginRoute: LoginRoute,
+  PayTokenRoute: PayTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
