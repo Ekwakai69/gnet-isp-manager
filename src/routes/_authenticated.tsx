@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, Outlet } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -8,9 +8,5 @@ export const Route = createFileRoute("/_authenticated")({
       throw redirect({ to: "/login" });
     }
   },
-  component: () => (
-    <Layout>
-      <Outlet />
-    </Layout>
-  ),
+  component: Layout,
 });
