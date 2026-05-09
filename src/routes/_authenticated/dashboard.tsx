@@ -80,7 +80,9 @@ function DashboardPage() {
 
   const isLoading = dashQ.isLoading || clientsQ.isLoading;
 
-  const dashStats = (dashQ.data?.stats || dashQ.data || {}) as any;
+  const dash: any = dashQ.data?.data || dashQ.data || {};
+  const summary = dash.summary || dash.stats || dash;
+  const revenue = dash.revenue || {};
   const clientList = asArray(clientsQ.data);
   const invoiceList = asArray(invoicesQ.data);
   const paymentList = asArray(paymentsQ.data);
@@ -95,6 +97,8 @@ function DashboardPage() {
   const computed = {
     totalClients: clientList.length,
     activeClients: clientList.filter(isActive).length,
+    inactiveClients: clientList.filter((c) => String(pick(c, "status") || "").toLowerCase() === "inactive").length,
+    expiredClients: clientList.filter((c) => String(pick(c, "status") || "").toLowerCase() === "expired").length,
     revenueToday: paymentList
       .filter((p) => { const d = new Date(dateOf(p) || 0).getTime(); return d >= startOfDay; })
       .reduce((s, p) => s + amountOf(p), 0),
@@ -116,20 +120,26 @@ function DashboardPage() {
     }).length,
   };
 
-  const v = (apiKey: string[], computedVal: number) => {
-    const got = pick(dashStats, ...apiKey);
+  const v = (apiKeys: string[], computedVal: number, src: any = summary) => {
+    const got = pick(src, ...apiKeys);
     return got !== undefined ? got : computedVal;
   };
 
+  const currency = dash.isp?.currency_symbol || "Ksh";
+
   const cards = [
-    { label: "Total Clients", value: v(["totalClients", "total_clients", "clients_count"], computed.totalClients) },
-    { label: "Active Clients", value: v(["activeClients", "active_clients"], computed.activeClients) },
-    { label: "Revenue Today", value: fmtKES(v(["revenueToday", "revenue_today", "today_revenue"], computed.revenueToday) as number) },
-    { label: "Revenue This Month", value: fmtKES(v(["revenueMonth", "revenue_month", "monthly_revenue"], computed.revenueMonth) as number) },
-    { label: "Expiring Soon", value: v(["expiringSoon", "expiring_soon"], computed.expiringSoon) },
-    { label: "Open Tickets", value: v(["openTickets", "open_tickets"], computed.openTickets) },
-    { label: "Unpaid Invoices", value: v(["unpaidInvoices", "unpaid_invoices", "pending_invoices"], computed.unpaidInvoices) },
-    { label: "Total Payments", value: paymentList.length },
+    { label: "Total Clients", value: v(["total_clients", "totalClients", "clients_count"], computed.totalClients) },
+    { label: "Active Clients", value: v(["active_clients", "activeClients"], computed.activeClients) },
+    { label: "Inactive Clients", value: v(["inactive_clients"], computed.inactiveClients) },
+    { label: "Expired Clients", value: v(["expired_clients"], computed.expiredClients) },
+    { label: `Revenue Today`, value: fmtKES(v(["today", "revenue_today", "revenueToday"], computed.revenueToday, revenue) as number) },
+    { label: `Revenue This Month`, value: fmtKES(v(["month", "revenue_month", "revenueMonth"], computed.revenueMonth, revenue) as number) },
+    { label: "Active Sessions", value: v(["active_sessions"], 0) },
+    { label: "Expiring Soon", value: v(["expiring_soon", "expiringSoon"], computed.expiringSoon) },
+    { label: "Open Tickets", value: v(["open_tickets", "openTickets"], computed.openTickets) },
+    { label: "Unpaid Invoices", value: v(["unpaid_invoices", "pending_invoices"], computed.unpaidInvoices) },
+    { label: "Total Packages", value: v(["total_packages"], 0) },
+    { label: "Hotspot Packages", value: v(["hotspot_packages"], 0) },
   ];
 
   // Revenue trend (last 14 days from payments)
@@ -144,22 +154,26 @@ function DashboardPage() {
     if (trendMap.has(k)) trendMap.set(k, (trendMap.get(k) || 0) + amountOf(p));
   });
   const revenueTrend =
-    dashQ.data?.revenueTrend || dashQ.data?.revenue_trend ||
+    dash.revenueTrend || dash.revenue_trend ||
     Array.from(trendMap, ([date, amount]) => ({ date: date.slice(5), amount }));
 
-  // Top packages from clients
+  // Top packages
   const pkgCounts = new Map<string, number>();
   clientList.forEach((c) => {
-    const name = pick(c, "package.name", "package_name", "plan", "subscription") || "Unknown";
+    const name = pick(c, "package", "package_name", "package.name", "plan") || "Unknown";
     pkgCounts.set(String(name), (pkgCounts.get(String(name)) || 0) + 1);
   });
-  const topPackages =
-    dashQ.data?.topPackages || dashQ.data?.top_packages ||
+  const topPackagesRaw =
+    dash.top_packages || dash.topPackages ||
     Array.from(pkgCounts, ([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count).slice(0, 6);
+  const topPackages = (topPackagesRaw || []).map((p: any) => ({
+    name: p.name,
+    count: p.count ?? p.active_subscribers ?? p.subscribers ?? 0,
+  }));
 
   const recentPayments =
-    dashQ.data?.recentPayments || dashQ.data?.recent_payments ||
+    dash.recent_payments || dash.recentPayments ||
     [...paymentList].sort((a, b) =>
       new Date(dateOf(b) || 0).getTime() - new Date(dateOf(a) || 0).getTime()
     ).slice(0, 8);
