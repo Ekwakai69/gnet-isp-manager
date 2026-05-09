@@ -125,7 +125,7 @@ function DashboardPage() {
     return got !== undefined ? got : computedVal;
   };
 
-  const currency = dash.isp?.currency_symbol || "Ksh";
+  
 
   const cards = [
     { label: "Total Clients", value: v(["total_clients", "totalClients", "clients_count"], computed.totalClients) },
