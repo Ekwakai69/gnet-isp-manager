@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { routersApi } from "@/services/api";
+import { routersApi, acs, clients as clientsApi } from "@/services/api";
 import { PageHeader, StatusBadge } from "@/components/DataTable";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -22,13 +22,13 @@ function RouterDetail() {
   const r: any = data?.data || data || {};
 
   const reboot = useMutation({
-    mutationFn: () => routersApi.reboot(id),
+    mutationFn: () => acs.reboot(String(r.client_id || "")),
     onSuccess: () => toast.success("Reboot requested"),
     onError: (e: any) => toast.error(e?.response?.data?.message || "Failed"),
   });
   const refresh = useMutation({
-    mutationFn: () => routersApi.refresh(id),
-    onSuccess: () => { toast.success("Refreshing parameters"); qc.invalidateQueries({ queryKey: ["router", id] }); },
+    mutationFn: () => clientsApi.getConnection(String(r.client_id || "")),
+    onSuccess: () => { toast.success("Refreshed"); qc.invalidateQueries({ queryKey: ["router", id] }); },
     onError: (e: any) => toast.error(e?.response?.data?.message || "Failed"),
   });
 
